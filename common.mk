@@ -339,6 +339,7 @@ PRODUCT_PACKAGES += \
     init.recovery.mt6768.rc \
     init.recovery.mt6769t.rc \
     init.recovery.samsung.rc \
+    init.recovery.usb.rc \
     init.target.rc \
     ueventd.mtk.rc
 
