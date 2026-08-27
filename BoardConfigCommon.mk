@@ -187,6 +187,15 @@ DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
   hardware/samsung/vintf/samsung_framework_compatibility_matrix.xml
 
 DEVICE_MANIFEST_FILE += $(COMMON_PATH)/configs/vintf/manifest.xml
+
+ifneq (,$(filter $(TARGET_DEVICE), a22 m22 f22))
+DEVICE_MANIFEST_FILE += $(COMMON_PATH)/configs/vintf/manifest_touch_basic.xml
+endif
+
+ifneq (,$(filter $(TARGET_DEVICE), a32 m32))
+DEVICE_MANIFEST_FILE += $(COMMON_PATH)/configs/vintf/manifest_touch_full.xml
+endif
+
 DEVICE_MATRIX_FILE += $(COMMON_PATH)/configs/vintf/compatibility_matrix.xml
 
 # VNDK
