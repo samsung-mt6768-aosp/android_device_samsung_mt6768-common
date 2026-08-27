@@ -9,5 +9,6 @@ soong_namespace {
         "vendor/samsung/a32",
         "hardware/google/interfaces",
         "hardware/google/pixel",
+        "vendor/samsung/mt6768-common",
     ],
 }
