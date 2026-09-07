@@ -6,6 +6,8 @@
 
 soong_namespace {
     imports: [
-        "device/samsung/mt6768-common",
+        "vendor/samsung/a32",
+        "hardware/google/interfaces",
+        "hardware/google/pixel",
     ],
 }

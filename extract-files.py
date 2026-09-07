@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-#run PYTHONPATH=$PWD/tools/extract-utils python device/samsung/a32/extract-files.py
+#run PYTHONPATH=$PWD/tools/extract-utils python device/samsung/mt6768-common/extract-files.py
 
 from extract_utils.fixups_blob import (
     blob_fixup,
@@ -20,10 +20,9 @@ from extract_utils.main import (
 )
 
 namespace_imports = [
-    'vendor/samsung/a32',
+    'vendor/samsung/mt6768-common',
     'hardware/mediatek',
     'hardware/samsung',
-    'device/samsung/mt6768-common',
 ]
 
 lib_fixups: lib_fixups_user_type = {
@@ -99,7 +98,7 @@ blob_fixups: blob_fixups_user_type = {
 }  # fmt: skip
 
 module = ExtractUtilsModule(
-    'a32',
+    'mt6768-common',
     'samsung',
     blob_fixups=blob_fixups,
     lib_fixups=lib_fixups,
@@ -107,7 +106,5 @@ module = ExtractUtilsModule(
 )
 
 if __name__ == '__main__':
-    utils = ExtractUtils.device_with_common(
-        module, 'mt6768-common', module.vendor
-    )
+    utils = ExtractUtils.device(module)
     utils.run()
