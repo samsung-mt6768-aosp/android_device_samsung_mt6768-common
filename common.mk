@@ -100,10 +100,6 @@ PRODUCT_PACKAGES += \
     charger_res_images_vendor \
     libsuspend
 
-# ConfigStore
-PRODUCT_PACKAGES += \
-    disable_configstore
-
 # Display
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@3.0.vendor \
@@ -133,10 +129,6 @@ PRODUCT_PACKAGES += \
     libprotobuf-cpp-full-3.9.1-vendorcompat \
     libprotobuf-cpp-lite-3.9.1-vendorcompat \
     libz_stable.vendor
-
-# Dumpstate
-PRODUCT_PACKAGES += \
-    android.hardware.dumpstate@1.1.vendor:64
 
 # Dynamic partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
@@ -192,10 +184,6 @@ PRODUCT_PACKAGES += \
 # Vendor Service Manager
 PRODUCT_PACKAGES += \
     vndservicemanager
-
-# Light
-PRODUCT_PACKAGES += \
-    android.hardware.light@2.0.vendor:64
 
 # Media
 PRODUCT_PACKAGES += \
