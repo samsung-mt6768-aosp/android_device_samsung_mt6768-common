@@ -64,9 +64,22 @@ TARGET_RECOVERY_DEVICE_MODULES := libinit_mt6768
 
 # Kernel specific flags
 TARGET_KERNEL_ADDITIONAL_FLAGS := \
+  CC=clang \
   LD=ld.lld \
+  AR=llvm-ar \
+  NM=llvm-nm \
+  OBJCOPY=llvm-objcopy \
+  OBJDUMP=llvm-objdump \
+  READELF=llvm-readelf \
+  STRIP=llvm-strip \
   HOSTLD=ld.lld \
-  HOSTCFLAGS="-fuse-ld=lld"
+  HOSTCC=clang \
+  HOSTCXX=clang++ \
+  HOSTCFLAGS="-fuse-ld=lld" \
+  HOSTLDFLAGS="-fuse-ld=lld" \
+  AS=clang \
+  LLVM=1 \
+  LLVM_IAS=1
 
 # Kernel
 TARGET_KERNEL_ARCH := arm64
