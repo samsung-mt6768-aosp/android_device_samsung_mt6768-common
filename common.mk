@@ -460,7 +460,9 @@ PRODUCT_COPY_FILES += \
     prebuilts/vndk/v31/arm64/arch-arm64-armv8-a/shared/vndk-sp/libhidlbase.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libhidlbase-v31.so \
     prebuilts/vndk/v31/arm64/arch-arm64-armv8-a/shared/llndk-stub/liblog.so:$(TARGET_COPY_OUT_VENDOR)/lib64/liblog-v31.so \
     prebuilts/vndk/v33/arm64/arch-arm64-armv8-a/shared/vndk-core/libstagefright_foundation.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libstagefright_foundation-v33.so \
-    prebuilts/vndk/v31/arm64/arch-arm64-armv8-a/shared/vndk-core/libstagefright_bufferqueue_helper.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libstagefright_bufferqueue_helper-v31.so
+    prebuilts/vndk/v31/arm64/arch-arm64-armv8-a/shared/vndk-core/libstagefright_bufferqueue_helper.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libstagefright_bufferqueue_helper-v31.so \
+    prebuilts/vndk/v33/arm64/arch-arm64-armv8-a/shared/vndk-sp/libion.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libion.so \
+    prebuilts/vndk/v33/arm64/arch-arm-armv8-a/shared/vndk-sp/libion.so:$(TARGET_COPY_OUT_VENDOR)/lib/libion.so
     
     # Inherit the proprietary files
 $(call inherit-product, vendor/samsung/mt6768-common/mt6768-common-vendor.mk)
