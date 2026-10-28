@@ -240,3 +240,7 @@ $(call soong_config_set,surfaceflinger,udfps_lib,//hardware/samsung/fingerprint:
 $(call soong_config_set,samsungUdfpsVars,udfps_zorder,0x2000U)
 TARGET_ADDITIONAL_GRALLOC_10_USAGE_BITS := 0x20002000ULL
 endif
+
+# Charger
+BOARD_CHARGER_ENABLE_SUSPEND := true
+BOARD_CHARGER_SHOW_PERCENTAGE := true
