@@ -221,10 +221,12 @@ PRODUCT_PACKAGES += \
     libtextclassifier_hash.vendor
 
 # NFC
-PRODUCT_PACKAGES += \
-    android.hardware.nfc@1.2.vendor \
-    com.android.nfc_extras \
-    Tag
+ifneq ($(TARGET_DEVICE),f22)
+    PRODUCT_PACKAGES += \
+        android.hardware.nfc@1.2.vendor \
+        com.android.nfc_extras \
+        Tag
+endif
 
 # Network tools
 PRODUCT_PACKAGES += \
