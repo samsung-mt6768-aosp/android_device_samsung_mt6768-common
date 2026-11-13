@@ -10,8 +10,8 @@
 /dev/drb                                                            u:object_r:drb_device:s0
 
 # EFS
-/mnt/vendor/efs/taas(/.*)?                                          u:object_r:taas_efs_file:s0
-/mnt/vendor/efs(/.*)?                                               u:object_r:efs_file:s0
+/mnt/vendor/efs/taas(/.*)?                                                             u:object_r:taas_efs_file:s0
+/mnt/vendor/efs(/.*)?                                                                  u:object_r:efs_file:s0
 
 # Fingerprint
 /(vendor|system/vendor)/bin/hw/android\.hardware\.biometrics\.fingerprint-service\.mt6768              u:object_r:hal_fingerprint_default_exec:s0
@@ -98,3 +98,13 @@
 # Wi-Fi
 /data/vendor/conn(/.*)?                                                         u:object_r:vendor_convergence_data_file:s0
 /mnt/vendor/efs/wifi(/.*)?                                                      u:object_r:wifi_efs_file:s0
+
+# Touch-HAL (Phase 2: war ungelabelt -> init startete unter enforcing nicht)
+/(vendor|system/vendor)/bin/hw/vendor\.lineage\.touch-service\.samsung                 u:object_r:hal_lineage_touch_default_exec:s0
+/(vendor|system/vendor)/bin/hw/vendor\.lineage\.livedisplay-service\.samsung-qcom      u:object_r:hal_lineage_livedisplay_samsung_qcom_exec:s0
+/(vendor|system/vendor)/bin/hw/nxp\.android\.hardware\.nfc@1\.2-service               u:object_r:hal_nfc_default_exec:s0
+# NFC pn547 (init.mt6768.rc chown)
+/dev/pn547                                                                             u:object_r:nfc_device:s0
+# taas-Log (hal_sec_inputdev_default hat taas_efs_file-Regeln, Label fehlte)
+# /mnt/vendor/efs/taas ist oben in Zeile ~13 schon gelabelt — kein Doppel-Eintrag!
+/efs/taas(/.*)?                                                                        u:object_r:taas_efs_file:s0

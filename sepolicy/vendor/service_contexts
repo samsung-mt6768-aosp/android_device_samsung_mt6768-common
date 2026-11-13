@@ -1,0 +1,2 @@
+# AIDL-Services der Samsung-Vendor-Daemons (nativer service_manager)
+vendor.samsung.hardware.hyper.ISehHyPer/default    u:object_r:hal_hyper_service:s0
