@@ -1,7 +1,11 @@
 typeattribute hal_power_default mlstrustedsubject;
 
 allow hal_power_default sysfs_devices_system_cpu:file rw_file_perms;
-allow hal_power_default cgroup:file r_file_perms;
+# perfmgr/stune/mali/ged-Nodes: SELinux-Seite ueber Labels/Typen geloest,
+# DAC-Seite ueber rc-chowns in init.cgroup.rc (dac_override ist neverallow-
+# gesperrt, domain.te:2082).
+allow hal_power_default cgroup:file rw_file_perms;
+allow hal_power_default sysfs_ged:file rw_file_perms;
 
 # To get/set powerhal state property
 set_prop(hal_power_default, vendor_power_prop)
@@ -48,3 +52,5 @@ allow hal_power_default sysfs_battery:dir r_dir_perms;
 allow hal_power_default sysfs_battery:file rw_file_perms;
 allow hal_power_default sysfs_gpu:dir r_dir_perms;
 allow hal_power_default sysfs_gpu:file rw_file_perms;
+allow hal_power_default sysfs_sec:dir r_dir_perms;
+allow hal_power_default sysfs_sec:file rw_file_perms;

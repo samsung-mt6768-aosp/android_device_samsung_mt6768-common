@@ -1,1 +1,5 @@
 get_prop(system_app, vendor_aware_available_prop)
+
+# Proximity-Helper liest /sys/class/sec/tsp/cmd_result (Phase-1-AVC: 79x)
+allow system_app sysfs_sec:dir r_dir_perms;
+allow system_app sysfs_sec:file r_file_perms;

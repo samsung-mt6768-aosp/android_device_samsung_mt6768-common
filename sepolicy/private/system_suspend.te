@@ -1,3 +1,6 @@
 allow system_suspend sysfs_wakeup:dir r_dir_perms;
 allow system_suspend sysfs_wakeup:file r_file_perms;
 allow system_suspend sysfs_wakeup:lnk_file r_file_perms;
+# sec-direct-charger wakeup26/name (Phase-1-AVC: 12x)
+allow system_suspend sysfs_battery:dir r_dir_perms;
+allow system_suspend sysfs_battery:file r_file_perms;

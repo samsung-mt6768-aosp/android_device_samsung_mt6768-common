@@ -1,0 +1,12 @@
+# AIDL-LiveDisplay der qcom-Variante (hardware/samsung/aidl/livedisplay).
+# War ungelabelt -> init-Domain; Service-Typen/Registration kommen aus
+# device/lineage/sepolicy/common/dynamic (hal_lineage_livedisplay).
+type hal_lineage_livedisplay_samsung_qcom, domain;
+hal_server_domain(hal_lineage_livedisplay_samsung_qcom, hal_lineage_livedisplay)
+type hal_lineage_livedisplay_samsung_qcom_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hal_lineage_livedisplay_samsung_qcom)
+binder_call(hal_lineage_livedisplay_samsung_qcom, servicemanager)
+
+# Mdnie-Knoten (mode, sensorRGB, power_reduce, outdoor) — genfscon siehe genfs_contexts
+allow hal_lineage_livedisplay_samsung_qcom sysfs_ski_display_writable:dir r_dir_perms;
+allow hal_lineage_livedisplay_samsung_qcom sysfs_ski_display_writable:file rw_file_perms;

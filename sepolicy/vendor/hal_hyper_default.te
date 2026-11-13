@@ -3,6 +3,12 @@ type hal_hyper_default_exec, exec_type, file_type, vendor_file_type;
 
 init_daemon_domain(hal_hyper_default)
 
+# AIDL-Service registriert ISehHyPer/default beim nativen servicemanager
+# (AServiceManager_addService). Eigener Typ + service_contexts verhindern den
+# Fallback auf default_android_service (neverallow domain.te:832).
+add_service(hal_hyper_default, hal_hyper_service)
+binder_call(hal_hyper_default, servicemanager)
+
 allow hal_hyper_default sysfs_power:dir r_dir_perms;
 allow hal_hyper_default sysfs_power:file rw_file_perms;
 allow hal_hyper_default proc_kswapd_perftune_cpumask:file rw_file_perms;

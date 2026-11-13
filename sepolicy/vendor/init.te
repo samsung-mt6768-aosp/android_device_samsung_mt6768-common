@@ -2,4 +2,22 @@ allow init lk_block_device:lnk_file relabelto;
 allow init efs_file:dir mounton;
 allow init sysfs_devices_block:file rw_file_perms;
 
+# permfix-Service/rc-chowns auf Power-HAL-Nodes (chown braucht open+read+setattr)
+# Pfad-Aufloesung fuer chmod/chown braucht zusaetzlich dir search:
+allow init proc_perfmgr:dir r_dir_perms;
+allow init proc_cpufreq:dir r_dir_perms;
+allow init sysfs_gpu:dir r_dir_perms;
+allow init sysfs_ged:dir r_dir_perms;
+allow init sysfs_ski_touch_writable:file r_file_perms;
+# tsp/cmd ist sysfs_sec (genfscon /devices/virtual/sec/tsp/cmd) — fuer chmod:
+allow init sysfs_sec:dir r_dir_perms;
+allow init sysfs_sec:file { getattr open read setattr };
+
+allow init proc_perfmgr:file { getattr open read setattr };
+allow init proc_cpufreq:file { getattr open read setattr };
+allow init sysfs_gpu:file { getattr open read setattr };
+allow init sysfs_ged:file { getattr open read setattr };
+allow init cgroup:file { getattr open read setattr };
+allow init sysfs_ski_touch_writable:file { getattr open read setattr };
+
 set_prop(rild, vendor_model_suffix_prop)

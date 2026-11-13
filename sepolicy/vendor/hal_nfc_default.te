@@ -1,3 +1,6 @@
 allow hal_nfc_default hal_nfc_hwservice:hwservice_manager { add find };
 
 get_prop(hal_nfc_default, product_ship_prop)
+
+# NXP-Daemon ist Vendor-HIDL (vndbinder), evidence: Phase-1-AVC
+vndbinder_use(hal_nfc_default)
