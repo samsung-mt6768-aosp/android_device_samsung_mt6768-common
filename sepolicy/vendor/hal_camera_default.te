@@ -10,6 +10,11 @@ allow hal_camera_default nvcfg_file:dir create_dir_perms;
 allow hal_camera_default nvcfg_file:file create_file_perms;
 allow hal_camera_default nvcfg_file:lnk_file r_file_perms;
 allow hal_camera_default self:capability sys_nice;
+# /sys/devices/virtual/camera/flash/rear_flash + /efs/FactoryApp (Phase-1-AVC)
+allow hal_camera_default sysfs_camera:dir r_dir_perms;
+allow hal_camera_default sysfs_camera:file rw_file_perms;
+allow hal_camera_default efs_file:file r_file_perms;
+allow hal_camera_default efs_file:dir search;
 allow hal_camera_default sysfs_boot_mode:file r_file_perms;
 allow hal_camera_default flashlight_device:chr_file rw_file_perms;
 allow hal_camera_default proc_thermal:dir search;
@@ -42,15 +47,31 @@ binder_call(hal_camera_default, hal_graphics_allocator_default)
 binder_call(hal_camera_default, mtk_hal_power)
 
 hal_client_domain(hal_camera_default, hal_graphics_allocator)
+# IMtkPower/IMtkPerf (vendor.mediatek.hardware.mtkpower@1.x) ist in
+# hwservice_contexts auf hal_power_hwservice gelabelt; find ist nur fuer
+# hal_power_client erlaubt (neverallow base_typeattr_736, plat_sepolicy.cil).
+# hal_client_domain setzt die Client-Rolle — der einzige neverallow-konforme
+# Weg (Muster: mtk_hal_camera.te:35). Ohne das liefert getService() unter
+# Enforcing still nullptr -> SIGSEGV im Session-Konstruktor (6 Tombstones 13.11.).
+hal_client_domain(hal_camera_default, hal_power)
 
 allow hal_camera_default hal_graphics_mapper_hwservice:hwservice_manager find;
 allow hal_camera_default hal_camera_hwservice:hwservice_manager { add find };
 allow hal_camera_default hal_graphics_mapper_hwservice:hwservice_manager find;
 
-dontaudit hal_camera_default hal_graphics_allocator_hwservice:hwservice_manager find;
-dontaudit hal_camera_default hal_power_hwservice:hwservice_manager find;
-dontaudit hal_camera_default hal_configstore_ISurfaceFlingerConfigs:hwservice_manager find;
-dontaudit hal_camera_default mtk_hal_bgs_hwservice:hwservice_manager { add find };
+# dontaudits entfernt (2026-11-13): ein verdeckter Denial (hal_power_hwservice
+# find) liess den Provider 6x still crashen. Ab jetzt erscheint jede Luecke
+# als AVC und ist diagnostizierbar. Kein Grant — nur Sichtbarkeit.
+# JPEG-Bridge (Phase-1-Luecke hal_camera_default -> /proc/mtk_jpeg, Muster
+# mtk_hal_camera.te:50-56)
+allow hal_camera_default proc_mtk_jpeg:file r_file_perms;
+allowxperm hal_camera_default proc_mtk_jpeg:file ioctl {
+     JPG_BRIDGE_ENC_IO_INIT
+     JPG_BRIDGE_ENC_IO_CONFIG
+     JPG_BRIDGE_ENC_IO_WAIT
+     JPG_BRIDGE_ENC_IO_DEINIT
+     JPG_BRIDGE_ENC_IO_START
+     };
 
 set_prop(hal_camera_default, sec_camera_prop)
 get_prop(hal_camera_default, vendor_sec_camera_prop)
