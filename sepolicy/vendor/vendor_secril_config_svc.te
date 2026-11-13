@@ -5,6 +5,11 @@ init_daemon_domain(vendor_secril_config_svc)
 
 allow vendor_secril_config_svc efs_file:dir r_dir_perms;
 allow vendor_secril_config_svc efs_file:file r_file_perms;
+# Erste-Boot-Bridge: SimConfig laeuft in "on fs", die restorecon_recursive
+# /mnt/vendor/efs aber spaeter (on post-fs-data) — stale xattr-Labels eines
+# frueheren Builds duerfen den factory.prop-Lesefluss nicht still abschneiden
+# (13.11.2026: SIM-Erkennung tot, simslotcount=1 statt 2).
+allow vendor_secril_config_svc mnt_vendor_file:file r_file_perms;
 allow vendor_secril_config_svc property_socket:sock_file write;
 allow vendor_secril_config_svc init:unix_stream_socket connectto;
 allow vendor_secril_config_svc mnt_vendor_file:dir search;
