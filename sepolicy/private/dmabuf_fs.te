@@ -1,0 +1,4 @@
+# statfs on the dma-buf pseudo-fs (dmabuf_fs): metadata-only getattr, done by
+# Skia/RenderThread and SurfaceFlinger RenderEngine on dma-buf fds. Harmless
+# and universal — mirror of AOSP's "allow domain dmabuf_heap_device:dir ...".
+allow domain dmabuf_fs:filesystem getattr;

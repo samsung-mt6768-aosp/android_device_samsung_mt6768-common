@@ -1,0 +1,5 @@
+# dma-buf internal pseudo-fs (dma-buf.c mount_pseudo, root dentry "dmabuf:",
+# s_id "dmabuf"). Without a label every fstatfs() on a dma-buf fd gets audited
+# (avc: denied { getattr } name="dmabuf:" dev="dmabuf" tclass=filesystem,
+# comm=RenderThread/RenderEngine) — hundreds per minute while rendering.
+genfscon dmabuf / u:object_r:dmabuf_fs:s0
